@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ Mongoose 8 connected successfully'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// --- ĐỊNH NGHĨA SCHEMA ---
+// --- SCHEMA DEFINITION ---
 const profileSchema = new mongoose.Schema({
   name: String,
   age: Number,
@@ -31,15 +31,13 @@ const swipeSchema = new mongoose.Schema({
 });
 const Swipe = mongoose.model('Swipe', swipeSchema);
 
-// --- TASK T12: API GET /api/profiles ---
-// 3. Async/Await GET Endpoint (Optimized read via .lean())
+// --- T12: API GET /api/profiles ---
 app.get('/api/profiles', async (req, res) => {
   const profiles = await Profile.find().lean();
   res.json(profiles);
 });
 
-// --- TASK T13: API POST /api/swipe ---
-// 4. Async/Await POST Endpoint with Try/Catch Block
+// --- T13: API POST /api/swipe ---
 app.post('/api/swipe', async (req, res) => {
   try {
     const record = await Swipe.create(req.body);
