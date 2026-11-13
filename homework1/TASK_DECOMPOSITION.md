@@ -92,3 +92,20 @@ Scope:
 - Verified all 10 WBS sub-tasks completed with zero linter warnings and clean build.
 - Documented full commit history and architectural contracts.
 - Final quality gate sign-off ready for live defense.
+
+## Lab 4 Homework 1 - Full-Stack Swipe Deck ('Hẹn Hò Nhưng Không Yêu')
+
+### Phase 1 - Backend API & Persistence (Express + Mongoose 8)
+- [ ] T11: Configure Express server and Mongoose 8 connection with zero deprecated flags.
+- [ ] T12: Define Schema and implement GET `/api/profiles` endpoint optimized with `.lean()`.
+- [ ] T13: Implement POST `/api/swipe` endpoint with `try/catch` payload validation.
+
+### Phase 2 - Frontend Integration & Gestures
+- [ ] T14: Integrate Backend API to fetch profiles instead of using mock data.
+- [ ] T15: Implement POST requests within the Dual Keyboard/Pointer Event Listeners.
+- [ ] T16: Synchronize LIFO Undo Stack (Backspace) with the new backend architecture.
+- [ ] T17: Compute Asymmetric Score using Pure Derived State during the render pass.
+
+### Phase 3 - Quality Gates & Audit
+- [ ] T18: Document any AI hallucinations and manual fixes in `AI_FAILURE_AUDIT.md`.
+- [ ] T19: Capture final result screenshots and compile into a single PDF submission.
