@@ -15,6 +15,40 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ Mongoose 8 connected successfully'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
+// --- ĐỊNH NGHĨA SCHEMA ---
+const profileSchema = new mongoose.Schema({
+  name: String,
+  age: Number,
+  bio: String,
+  imageUrl: String
+});
+const Profile = mongoose.model('Profile', profileSchema);
+
+const swipeSchema = new mongoose.Schema({
+  targetId: String,
+  action: String, // 'LIKE' hoặc 'PASS'
+  timestamp: { type: Date, default: Date.now }
+});
+const Swipe = mongoose.model('Swipe', swipeSchema);
+
+// --- TASK T12: API GET /api/profiles ---
+// 3. Async/Await GET Endpoint (Optimized read via .lean())
+app.get('/api/profiles', async (req, res) => {
+  const profiles = await Profile.find().lean();
+  res.json(profiles);
+});
+
+// --- TASK T13: API POST /api/swipe ---
+// 4. Async/Await POST Endpoint with Try/Catch Block
+app.post('/api/swipe', async (req, res) => {
+  try {
+    const record = await Swipe.create(req.body);
+    res.status(201).json(record);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 app.listen(3000, () => {
   console.log('🚀 Swipe Deck API running on http://localhost:3000');
 });
