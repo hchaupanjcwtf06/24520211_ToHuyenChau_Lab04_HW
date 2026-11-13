@@ -21,7 +21,7 @@
 
 ---
 
-## Progress Log (Full 10 Commits)
+## Progress Log
 
 ### Commit 1 - feat(fsm): model HenHoKhongYeu state machine
 Status: Completed.  
@@ -96,16 +96,60 @@ Scope:
 ## Lab 4 Homework 1 - Full-Stack Swipe Deck ('Hẹn Hò Nhưng Không Yêu')
 
 ### Phase 1 - Backend API & Persistence (Express + Mongoose 8)
-- [ ] T11: Configure Express server and Mongoose 8 connection with zero deprecated flags.
-- [ ] T12: Define Schema and implement GET `/api/profiles` endpoint optimized with `.lean()`.
-- [ ] T13: Implement POST `/api/swipe` endpoint with `try/catch` payload validation.
+- [x] T11: Configure Express server and Mongoose 8 connection with zero deprecated flags.
+- [x] T12: Define Schema and implement GET `/api/profiles` endpoint optimized with `.lean()`.
+- [x] T13: Implement POST `/api/swipe` endpoint with `try/catch` payload validation.
 
 ### Phase 2 - Frontend Integration & Gestures
-- [ ] T14: Integrate Backend API to fetch profiles instead of using mock data.
-- [ ] T15: Implement POST requests within the Dual Keyboard/Pointer Event Listeners.
+- [x] T14: Integrate Backend API to fetch profiles instead of using mock data.
+- [x] T15: Implement POST requests within the Dual Keyboard/Pointer Event Listeners.
 - [ ] T16: Synchronize LIFO Undo Stack (Backspace) with the new backend architecture.
-- [ ] T17: Compute Asymmetric Score using Pure Derived State during the render pass.
+- [x] T17: Compute Asymmetric Score using Pure Derived State during the render pass.
 
 ### Phase 3 - Quality Gates & Audit
 - [ ] T18: Document any AI hallucinations and manual fixes in `AI_FAILURE_AUDIT.md`.
 - [ ] T19: Capture final result screenshots and compile into a single PDF submission.
+
+---
+
+## Progress Log - Lab 4 Homework 1
+
+### Commit 1 - init: scaffold express backend setup for swipe deck
+Status: Completed.
+Scope: Initialized Node.js backend, installed express/mongoose/cors/dotenv, added .gitignore.
+
+### Commit 2 - feat(backend): setup express server and mongoose 8 secure connection
+Status: Completed.
+Scope: Configured server.js, connected to MongoDB Atlas without deprecated flags.
+
+### Commit 3 - feat(backend): implement mongoose schemas and GET/POST swipe endpoints
+Status: Completed.
+Scope: Added Profile/Swipe schemas, GET /api/profiles, POST /api/swipe.
+
+### Commit 4 - build(frontend): configure React Router v7 and dependencies
+Status: Completed.
+Scope: Installed react-router, configured BrowserRouter in main.tsx.
+
+### Commit 5 - feat(frontend): implement full SwipeDeck in App.tsx with TS and React Router v7
+Status: Completed.
+Scope: Built SwipeDeck UI, dual event listeners, Asymmetric Score logic, backend API integration.
+
+### Commit 6 - chore(backend): add seed script to populate mock profiles
+Status: Pending.
+Scope: Write seed.js to inject initial data into MongoDB Atlas for UI testing.
+
+### Commit 7 - docs: update TASK_DECOMPOSITION.md with Lab 4 tracking
+Status: Pending.
+Scope: Update WBS and append Progress Log.
+
+### Commit 8 - fix(frontend): synchronize LIFO undo stack with backend state
+Status: Pending.
+Scope: Ensure Backspace undo pops the history stack correctly.
+
+### Commit 9 - docs: add AI_FAILURE_AUDIT.md documenting resolutions
+Status: Pending.
+Scope: Document Mongoose 8 and React Router v7 AI hallucinations.
+
+### Commit 10 - docs: add PDF screenshot of Swipe Deck final result
+Status: Pending.
+Scope: Capture final UI and submit.
