@@ -99,16 +99,17 @@ Scope:
 - [x] T11: Configure Express server and Mongoose 8 connection with zero deprecated flags.
 - [x] T12: Define Schema and implement GET `/api/profiles` endpoint optimized with `.lean()`.
 - [x] T13: Implement POST `/api/swipe` endpoint with `try/catch` payload validation.
+- [x] T14: Create `seed.js` script to populate MongoDB Atlas with stable image URLs.
 
 ### Phase 2 - Frontend Integration & Gestures
-- [x] T14: Integrate Backend API to fetch profiles instead of using mock data.
-- [x] T15: Implement POST requests within the Dual Keyboard/Pointer Event Listeners.
-- [ ] T16: Synchronize LIFO Undo Stack (Backspace) with the new backend architecture.
-- [x] T17: Compute Asymmetric Score using Pure Derived State during the render pass.
+- [x] T15: Integrate Backend API to fetch profiles and POST swipe actions.
+- [x] T16: Configure React Router v7 (`<BrowserRouter>` and `<Routes>`).
+- [x] T17: Synchronize LIFO Undo Stack (Backspace) and compute Asymmetric Score via pure derived state.
+- [x] T18: Implement dynamic drag-to-swipe physics (Pointer Events) and Tailwind CSS v3 dark mode UI.
 
 ### Phase 3 - Quality Gates & Audit
-- [ ] T18: Document any AI hallucinations and manual fixes in `AI_FAILURE_AUDIT.md`.
-- [ ] T19: Capture final result screenshots and compile into a single PDF submission.
+- [x] T19: Document AI hallucinations (React Router v5, Mongoose legacy flags) in `AI_FAILURE_AUDIT.md`.
+- [x] T20: Capture final UI screenshot with Tailwind styling and compile into a single PDF submission.
 
 ---
 
@@ -135,21 +136,25 @@ Status: Completed.
 Scope: Built SwipeDeck UI, dual event listeners, Asymmetric Score logic, backend API integration.
 
 ### Commit 6 - chore(backend): add seed script to populate mock profiles
-Status: Pending.
-Scope: Write seed.js to inject initial data into MongoDB Atlas for UI testing.
+Status: Completed.
+Scope: Wrote seed.js to inject initial data and fixed stable image URLs.
 
-### Commit 7 - docs: update TASK_DECOMPOSITION.md with Lab 4 tracking
-Status: Pending.
-Scope: Update WBS and append Progress Log.
+### Commit 7 - fix(frontend): sync react-router-dom imports and resolve routing context
+Status: Completed.
+Scope: Wrapped App in BrowserRouter to fix `useRoutes()` context error.
 
-### Commit 8 - fix(frontend): synchronize LIFO undo stack with backend state
-Status: Pending.
-Scope: Ensure Backspace undo pops the history stack correctly.
+### Commit 8 - docs: add AI_FAILURE_AUDIT.md documenting resolutions
+Status: Completed.
+Scope: Documented Mongoose 8 and React Router v7 AI hallucinations.
 
-### Commit 9 - docs: add AI_FAILURE_AUDIT.md documenting resolutions
-Status: Pending.
-Scope: Document Mongoose 8 and React Router v7 AI hallucinations.
+### Commit 9 - build(frontend): install tailwind v3 and revamp SwipeDeck UI with animations
+Status: Completed.
+Scope: Configured Tailwind CLI, PostCSS, and applied basic Tinder-like UI styles.
 
-### Commit 10 - docs: add PDF screenshot of Swipe Deck final result
-Status: Pending.
-Scope: Capture final UI and submit.
+### Commit 10 - feat(frontend): implement dynamic drag-to-swipe physics and dark mode theme
+Status: Completed.
+Scope: Added Pointer move events, dynamic inline transform rotations, LIKE/NOPE stamps, and dark slate theme.
+
+### Commit 11 - docs: add PDF screenshot of SwipeDeck UI final result
+Status: Completed.
+Scope: Capture the newly styled UI and submit as PDF.
