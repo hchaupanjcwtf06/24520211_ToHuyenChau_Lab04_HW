@@ -1,0 +1,17 @@
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+dist/
+build/
+.vite/
+
+.DS_Store
+Thumbs.db
