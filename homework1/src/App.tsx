@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router'; // React Router v7
+import { Routes, Route } from 'react-router-dom'; // React Router v7
 
 // --- Định nghĩa Type/Interface (TypeScript) ---
 interface Profile {

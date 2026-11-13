@@ -10,7 +10,7 @@ const profileSchema = new mongoose.Schema({
 const Profile = mongoose.model('Profile', profileSchema);
 
 const mockProfiles = [
-  { name: 'Eru Chitanda', age: 19, bio: 'Watashi, kininarimasu!', imageUrl: 'https://i.pinimg.com/736x/8d/68/7c/8d687c4a0378877bc3306db315a6b579.jpg' },
+  { name: 'Eru Chitanda', age: 19, bio: 'Watashi, kininarimasu!', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSozeQkERQ3d9V2mikhR-kpOI-2mZU8NKsEBwxzejRq9w&s=10' },
   { name: 'Drake', age: 37, bio: 'Trap Soul & R&B', imageUrl: 'https://i.pinimg.com/736x/01/29/7a/01297a7a1b6eb6fbe00e572ecb42d7da.jpg' },
   { name: 'Playboi Carti', age: 28, bio: 'Vamp', imageUrl: 'https://i.pinimg.com/736x/85/6d/0a/856d0ac40292f7e77a111ed3a78942b0.jpg' }
 ];
