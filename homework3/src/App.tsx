@@ -126,8 +126,8 @@ function PhotoGalleryLayout() {
                 onClick={() => handleSelectCategory(category)}
                 aria-pressed={activeCategory === category}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${activeCategory === category
-                    ? 'bg-cyan-400 text-slate-950'
-                    : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
+                  ? 'bg-cyan-400 text-slate-950'
+                  : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
                   }`}
               >
                 {category}
@@ -232,4 +232,4 @@ export default function App() {
       <Route path="*" element={<PhotoGalleryLayout />} />
     </Routes>
   );
-}
+} 
