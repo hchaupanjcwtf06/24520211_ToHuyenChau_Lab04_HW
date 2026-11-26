@@ -82,8 +82,6 @@ Scope: Capture the newly styled UI and submit as PDF.
 - [x] T29: Append HW2 AI hallucinations, waterfall loop fixes, and timer drift resolutions to `AI_FAILURE_AUDIT.md`.
 - [x] T30: Document project overview, setup commands, and architectural contracts in `homework2/README.md`.
 
----
-
 ## Progress Log - Lab 4 Homework 2
 
 ### Commit 12 - docs: append WBS tasks for Lab 4 Homework 2 esports appeal tribunal
@@ -109,3 +107,51 @@ Scope: Compute ban duration and financial penalty disproportionality ratios usin
 ### Commit 17 - docs(hw2): update AI_FAILURE_AUDIT.md, README.md, and final WBS status
 Status: Status: Completed.
 Scope: Document timer tab-drift, `useEffect` waterfall, and router fixes; add setup guide in `homework2/README.md` and final PDF evidence.
+
+---
+
+## Lab 4 Homework 3 - Production Multi-Route Photo & Evidence Gallery SPA
+
+### Phase 1 - Project Scaffolding & Routing Foundation (React Router v7)
+- [x] T31: Initialize Vite React-TypeScript application inside `homework3/` and configure Tailwind CSS v3 (`tailwindcss@3`, `postcss`, `autoprefixer`).
+- [x] T32: Install React Router v7 (`react-router`, `react-router-dom`) and wrap root `<App />` inside `<BrowserRouter>` in `homework3/src/main.tsx`.
+- [x] T33: Configure `<Routes>` and `<Route>` definitions for `PhotoGalleryLayout` with fallback catch-all routing.
+
+### Phase 2 - URL Deep Linking (`useSearchParams`) & Native `<dialog>` Lightbox
+- [x] T34: Implement deep-linked category filtering (`?category=...`) and keyword search inside `PhotoGalleryLayout` using `useSearchParams()`.
+- [x] T35: Derive selected lightbox state (`selectedPhotoId = searchParams.get('photoId')`) directly from URL query parameters without duplicate `useState` booleans.
+- [x] T36: Build native HTML5 `<dialog>` lightbox modal (`dialogRef`) driven by `showModal()` / `close()` inside `useEffect`, syncing `onClose` back to `setSearchParams`.
+- [x] T37: Enforce WCAG 2.2 AA accessibility compliance with `aria-pressed` filter toggles, `aria-labelledby` dialog headings, `Esc` dismissal, and programmatic focus on the close button.
+
+### Phase 3 - Quality Gates, Audit & Submission Evidence
+- [x] T38: Document HW3 AI failure modes (duplicate modal state drift, custom `<div>` overlay anti-patterns, missing ARIA labels) in `AI_FAILURE_AUDIT.md`.
+- [ ] T39: Document project overview, `useSearchParams` contract, and local setup instructions in `homework3/README.md`.
+- [ ] T40: Capture final UI + URL query string + open `<dialog>` lightbox screenshots and compile into a PDF submission inside `homework3/`.
+
+---
+
+## Progress Log - Lab 4 Homework 3
+
+### Commit 18 - chore(hw3): scaffold vite react-ts project and configure tailwind v3
+Status: Completed.
+Scope: Initialized Vite React-TS app in `homework3/`, installed dependencies, and configured Tailwind CSS v3 with PostCSS.
+
+### Commit 19 - build(hw3): wrap root App in BrowserRouter for React Router v7
+Status: Completed.
+Scope: Installed `react-router` and `react-router-dom`, and wrapped root `<App />` in `<BrowserRouter>` inside `homework3/src/main.tsx`.
+
+### Commit 20 - feat(hw3): implement PhotoGalleryLayout with useSearchParams filter and photoId state
+Status: Completed.
+Scope: Built `PhotoGalleryLayout` with URL-synchronized category filters, keyword search, and `photoId` query parameter selection.
+
+### Commit 21 - feat(hw3): add HTML5 dialog lightbox synced with photoId search param
+Status: Completed.
+Scope: Integrated native `<dialog>` with `dialogRef`, `showModal()` / `close()` lifecycle, `onClose` URL cleanup, and WCAG 2.2 AA focus/ARIA attributes.
+
+### Commit 22 - docs(hw3): update WBS and AI failure audit for photo gallery SPA
+Status: Completed.
+Scope: Appended T31-T40 breakdown to `TASK_DECOMPOSITION.md` and logged URL/dialog synchronization guardrails in `AI_FAILURE_AUDIT.md`.
+
+### Commit 23 - docs(hw3): add README, PDF screenshot evidence, and finalize WBS status
+Status: In progress.
+Scope: Document `homework3/README.md`, capture UI + `<dialog>` + URL deep-link screenshots into PDF, and mark T39-T40 complete.

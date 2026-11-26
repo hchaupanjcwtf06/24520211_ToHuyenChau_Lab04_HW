@@ -32,3 +32,19 @@
 ### 3. Missing Router Context & Package Drift After Vite Scaffold
 - **AI Hallucination:** Generated route components assuming `<BrowserRouter>` was already mounted at the root and overlooked dependency resets when scaffolding with `npm create vite`.
 - **Resolution:** Wrapped `<App />` with `<BrowserRouter>` in `homework2/src/main.tsx`, defined routes via `<Routes>` and `<Route>` in `App.tsx`, and reinstalled `react-router` and `react-router-dom` cleanly in `homework2/`.
+
+---
+
+## Homework 3 Audit — Photo & Evidence Gallery SPA (`useSearchParams` & `<dialog>`)
+
+1. **Duplicate / Conflicting Modal State (`useState` + `photoId` query param):**
+   - *Failure Risk:* Storing a separate `isOpen` boolean in `useState` alongside `searchParams.get('photoId')` causes URL and modal state to drift on browser back/forward or page reload.
+   - *Fix / Engineering Rule:* Derive `selectedPhotoId` directly from `useSearchParams()` and drive `<dialog>` via `showModal()` / `close()` inside `useEffect`, clearing `photoId` in `onClose`.
+
+2. **Non-Modal `<div>` Popups Instead of Native `<dialog>`:**
+   - *Failure Risk:* Custom `div` overlays often miss native `Esc` dismissal, backdrop isolation, and focus management.
+   - *Fix / Engineering Rule:* Use native HTML `<dialog ref={dialogRef} onClose={...}>` with explicit focus handling on the close button and `aria-labelledby`.
+
+3. **Outdated React Router v5 / Unlabelled Controls:**
+   - *Failure Risk:* Using legacy `<Switch>` or unlabelled icon/close buttons (`aria-label` missing) harms routing and accessibility.
+   - *Fix / Engineering Rule:* Use React Router v7 `<Routes>` / `<Route>` and explicit `aria-label` / `aria-pressed` attributes on interactive controls.
