@@ -11,3 +11,4 @@
 
 - `AI_FAILURE_AUDIT.md`: Bảng kiểm toán và ghi nhận các lỗi kỹ thuật do AI sinh ra theo yêu cầu của môn học.
 - `homework1/`: Homework 1 - Full-Stack Interactive Card-Swipe Deck ('Hen Ho Nhung Khong Yeu' Edition).
+- `homework2/`: Homework 2 - Full-Stack Esports Fair-Play Appeal Tribunal (Himass & TanVuu Case Study Specification).
