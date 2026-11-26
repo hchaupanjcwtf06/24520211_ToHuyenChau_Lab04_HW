@@ -1,75 +1,27 @@
-# React + TypeScript + Vite
+# Lab 4 Homework 1 - Full-Stack Interactive Card-Swipe Deck ('Hẹn Hò Nhưng Không Yêu')
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Full-stack interactive swipe-deck application built with React, TypeScript, Vite, Tailwind CSS v3, and React Router v7 on the frontend, paired with an Express and Mongoose 8 REST API backed by MongoDB Atlas.
 
-Currently, two official plugins are available:
+## Architecture & Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Frontend (`homework1/src/`):** React + TypeScript + Vite with React Router v7 (`<BrowserRouter>`, `<Routes>`), Tailwind CSS v3 dark mode UI, dynamic drag-to-swipe pointer physics, keyboard/pointer swipe handlers, a LIFO undo stack (`Backspace`), and asymmetric score calculation computed via derived state.
+- **Backend (`homework1/backend/`):** Node.js, Express, and Mongoose 8 (`mongoose.connect(process.env.MONGODB_URI)` without deprecated flags), exposing `GET /api/profiles` (optimized with `.lean()`) and `POST /api/swipe` with `try/catch` payload validation, plus `seed.js` to populate sample profiles.
 
-## React Compiler
+## Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `homework1/backend/server.js` — Express server, Mongoose schemas, and `/api/profiles` & `/api/swipe` routes.
+- `homework1/backend/seed.js` — Seed script for initial swipe-deck profiles.
+- `homework1/src/main.tsx` — Entry point mounting `<App />` inside `<BrowserRouter>`.
+- `homework1/src/App.tsx` — Swipe deck UI, pointer/keyboard controls, undo stack, and derived score logic.
 
-## Expanding the ESLint configuration
+## Running Locally
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Backend API
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Configure `MONGODB_URI` in `homework1/backend/.env`, then run:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+```bash
+cd homework1/backend
+npm install
+node seed.js
+node server.js
