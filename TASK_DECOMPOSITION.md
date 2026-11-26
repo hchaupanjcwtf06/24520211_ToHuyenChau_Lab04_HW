@@ -76,11 +76,11 @@ Scope: Capture the newly styled UI and submit as PDF.
 - [x] T25: Configure React Router v7 (`<Routes>`, `<Outlet />`, `useParams()`) for `/dossier/:playerID` dynamic routing.
 - [x] T26: Build Context Form Engine (`FormContext`, `InputField`, `ShowData`) with synchronous derived validation in render pass (zero `useEffect` waterfall).
 - [x] T27: Develop `useAppealSlaTimer()` hook with system timestamp delta and Page Visibility API (`document.addEventListener('visibilitychange')`) for zero-drift countdown.
-- [] T28: Implement `DisproportionalityMatrix` with derived state `useMemo(() => computeMatrix(dossierData))` comparing ban and fine ratios.
+- [x] T28: Implement `DisproportionalityMatrix` with derived state `useMemo(() => computeMatrix(dossierData))` comparing ban and fine ratios.
 
 ### Phase 3 - Quality Gates & Governance Audit
-- [] T29: Append HW2 AI hallucinations, waterfall loop fixes, and timer drift resolutions to `AI_FAILURE_AUDIT.md`.
-- [] T30: Document project overview, setup commands, and architectural contracts in `homework2/README.md`.
+- [x] T29: Append HW2 AI hallucinations, waterfall loop fixes, and timer drift resolutions to `AI_FAILURE_AUDIT.md`.
+- [x] T30: Document project overview, setup commands, and architectural contracts in `homework2/README.md`.
 
 ---
 
@@ -103,9 +103,9 @@ Status: Completed.
 Scope: Configured `/dossier/:playerID` routing with `useParams` and `<Outlet />`, synchronous derived validation in `FormContext`, and anti-drift `useAppealSlaTimer()`.
 
 ### Commit 16 - feat(hw2-frontend): implement DisproportionalityMatrix with memoized ratio calculations
-Status: Pending.
+Status: Completed.
 Scope: Compute ban duration and financial penalty disproportionality ratios using `useMemo` in render pass.
 
 ### Commit 17 - docs(hw2): update AI_FAILURE_AUDIT.md, README.md, and final WBS status
-Status: Pending.
+Status: Status: Completed.
 Scope: Document timer tab-drift, `useEffect` waterfall, and router fixes; add setup guide in `homework2/README.md` and final PDF evidence.
