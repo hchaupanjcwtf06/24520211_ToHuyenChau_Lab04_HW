@@ -125,8 +125,8 @@ Scope: Document timer tab-drift, `useEffect` waterfall, and router fixes; add se
 
 ### Phase 3 - Quality Gates, Audit & Submission Evidence
 - [x] T38: Document HW3 AI failure modes (duplicate modal state drift, custom `<div>` overlay anti-patterns, missing ARIA labels) in `AI_FAILURE_AUDIT.md`.
-- [ ] T39: Document project overview, `useSearchParams` contract, and local setup instructions in `homework3/README.md`.
-- [ ] T40: Capture final UI + URL query string + open `<dialog>` lightbox screenshots and compile into a PDF submission inside `homework3/`.
+- [x] T39: Document project overview, `useSearchParams` contract, and local setup instructions in `homework3/README.md`.
+- [x] T40: Capture final UI + URL query string + open `<dialog>` lightbox screenshots and compile into a PDF submission inside `homework3/`.
 
 ---
 
@@ -153,5 +153,5 @@ Status: Completed.
 Scope: Appended T31-T40 breakdown to `TASK_DECOMPOSITION.md` and logged URL/dialog synchronization guardrails in `AI_FAILURE_AUDIT.md`.
 
 ### Commit 23 - docs(hw3): add README, PDF screenshot evidence, and finalize WBS status
-Status: In progress.
+Status: Completed.
 Scope: Document `homework3/README.md`, capture UI + `<dialog>` + URL deep-link screenshots into PDF, and mark T39-T40 complete.
