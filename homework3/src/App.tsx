@@ -1,122 +1,169 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { Routes, Route, useSearchParams } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+export interface EvidencePhoto {
+  id: string;
+  title: string;
+  category: 'ALL' | 'MATCH_VOD' | 'TELEMETRY' | 'VENUE';
+  imageUrl: string;
+  caption: string;
 }
 
-export default App
+export const EVIDENCE_PHOTOS: EvidencePhoto[] = [
+  {
+    id: 'vod-01',
+    title: 'Final Objective Contest Frame',
+    category: 'MATCH_VOD',
+    imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=900&q=80',
+    caption: 'Replay capture at 28:14 showing player positioning and ping indicator.',
+  },
+  {
+    id: 'net-02',
+    title: 'Packet Loss & Latency Graph',
+    category: 'TELEMETRY',
+    imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80',
+    caption: 'Network telemetry spike logged during late-game teamfight.',
+  },
+  {
+    id: 'stage-03',
+    title: 'Arena Tribunal Briefing Desk',
+    category: 'VENUE',
+    imageUrl: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=900&q=80',
+    caption: 'Referees reviewing match evidence and appeal documentation.',
+  },
+];
+
+const CATEGORIES: Array<EvidencePhoto['category']> = ['ALL', 'MATCH_VOD', 'TELEMETRY', 'VENUE'];
+
+function PhotoGalleryLayout() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [keyword, setKeyword] = useState('');
+
+  const rawCategory = (searchParams.get('category') || 'ALL').toUpperCase();
+  const activeCategory: EvidencePhoto['category'] = CATEGORIES.includes(
+    rawCategory as EvidencePhoto['category']
+  )
+    ? (rawCategory as EvidencePhoto['category'])
+    : 'ALL';
+
+  const selectedPhotoId = searchParams.get('photoId');
+
+  const handleSelectCategory = (nextCategory: EvidencePhoto['category']) => {
+    const nextParams = new URLSearchParams(searchParams);
+    if (nextCategory === 'ALL') {
+      nextParams.delete('category');
+    } else {
+      nextParams.set('category', nextCategory);
+    }
+    setSearchParams(nextParams);
+  };
+
+  const handleSelectPhoto = (photoId: string) => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set('photoId', photoId);
+    setSearchParams(nextParams);
+  };
+
+  const visiblePhotos = EVIDENCE_PHOTOS.filter((photo) => {
+    const matchesCategory = activeCategory === 'ALL' || photo.category === activeCategory;
+    const term = keyword.trim().toLowerCase();
+    const matchesText =
+      !term ||
+      photo.title.toLowerCase().includes(term) ||
+      photo.caption.toLowerCase().includes(term);
+    return matchesCategory && matchesText;
+  });
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100 p-6">
+      <div className="max-w-5xl mx-auto space-y-6">
+        <header className="border-b border-slate-800 pb-4 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-wider text-cyan-400">
+              Lab 4 · Homework 3 · Photo &amp; Evidence Gallery
+            </p>
+            <h1 className="text-2xl font-bold mt-1">Evidence Gallery Layout</h1>
+          </div>
+          <span className="text-xs text-slate-400 font-mono">
+            category={activeCategory}
+            {selectedPhotoId ? ` | photoId=${selectedPhotoId}` : ''}
+          </span>
+        </header>
+
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+            {CATEGORIES.map((category) => (
+              <button
+                key={category}
+                type="button"
+                onClick={() => handleSelectCategory(category)}
+                aria-pressed={activeCategory === category}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${activeCategory === category
+                    ? 'bg-cyan-400 text-slate-950'
+                    : 'bg-slate-900 text-slate-300 border border-slate-800 hover:border-slate-700'
+                  }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          <input
+            type="search"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Search evidence..."
+            aria-label="Search evidence"
+            className="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-cyan-400"
+          />
+        </div>
+
+        <section
+          aria-label="Evidence photos"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
+          {visiblePhotos.map((photo) => (
+            <article
+              key={photo.id}
+              className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden flex flex-col justify-between"
+            >
+              <div>
+                <img
+                  src={photo.imageUrl}
+                  alt={photo.title}
+                  className="w-full h-44 object-cover"
+                />
+                <div className="p-4 space-y-1.5">
+                  <span className="inline-block text-[11px] font-semibold px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60">
+                    {photo.category}
+                  </span>
+                  <h2 className="font-bold text-white">{photo.title}</h2>
+                  <p className="text-xs text-slate-300">{photo.caption}</p>
+                </div>
+              </div>
+
+              <div className="px-4 pb-4">
+                <button
+                  type="button"
+                  onClick={() => handleSelectPhoto(photo.id)}
+                  className="w-full py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-cyan-300 transition"
+                >
+                  Inspect Photo
+                </button>
+              </div>
+            </article>
+          ))}
+        </section>
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<PhotoGalleryLayout />} />
+      <Route path="*" element={<PhotoGalleryLayout />} />
+    </Routes>
+  );
+}
