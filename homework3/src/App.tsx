@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Routes, Route, useSearchParams } from 'react-router-dom';
 
 export interface EvidencePhoto {
@@ -47,6 +47,27 @@ function PhotoGalleryLayout() {
     : 'ALL';
 
   const selectedPhotoId = searchParams.get('photoId');
+  const selectedPhoto =
+    EVIDENCE_PHOTOS.find((photo) => photo.id === selectedPhotoId) ?? null;
+
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    if (selectedPhoto) {
+      if (!dialog.open) {
+        dialog.showModal();
+      }
+      requestAnimationFrame(() => {
+        closeBtnRef.current?.focus();
+      });
+    } else if (dialog.open) {
+      dialog.close();
+    }
+  }, [selectedPhoto]);
 
   const handleSelectCategory = (nextCategory: EvidencePhoto['category']) => {
     const nextParams = new URLSearchParams(searchParams);
@@ -61,6 +82,12 @@ function PhotoGalleryLayout() {
   const handleSelectPhoto = (photoId: string) => {
     const nextParams = new URLSearchParams(searchParams);
     nextParams.set('photoId', photoId);
+    setSearchParams(nextParams);
+  };
+
+  const handleCloseDialog = () => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete('photoId');
     setSearchParams(nextParams);
   };
 
@@ -154,6 +181,45 @@ function PhotoGalleryLayout() {
             </article>
           ))}
         </section>
+
+        <dialog
+          ref={dialogRef}
+          onClose={handleCloseDialog}
+          aria-labelledby="lightbox-title"
+          className="backdrop:bg-black/75 bg-slate-900 text-slate-100 border border-slate-700 rounded-2xl p-0 max-w-2xl w-full shadow-2xl"
+        >
+          {selectedPhoto && (
+            <div className="p-5 space-y-4">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs text-cyan-400 font-semibold">
+                    {selectedPhoto.category} · ID: {selectedPhoto.id}
+                  </p>
+                  <h3 id="lightbox-title" className="text-xl font-bold mt-0.5">
+                    {selectedPhoto.title}
+                  </h3>
+                </div>
+                <button
+                  ref={closeBtnRef}
+                  type="button"
+                  onClick={handleCloseDialog}
+                  aria-label="Close lightbox dialog"
+                  className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                >
+                  Close (Esc)
+                </button>
+              </div>
+
+              <img
+                src={selectedPhoto.imageUrl}
+                alt={selectedPhoto.title}
+                className="w-full max-h-[60vh] object-contain rounded-lg bg-slate-950"
+              />
+
+              <p className="text-sm text-slate-300">{selectedPhoto.caption}</p>
+            </div>
+          )}
+        </dialog>
       </div>
     </div>
   );
